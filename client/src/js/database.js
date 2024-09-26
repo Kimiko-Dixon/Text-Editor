@@ -1,5 +1,6 @@
 import { openDB } from 'idb';
 
+//Creates database and store
 const initdb = async () =>
   openDB('jate', 1, {
     upgrade(db) {
@@ -12,7 +13,7 @@ const initdb = async () =>
     },
   });
 
-// TODO: Add logic to a method that accepts some content and adds it to the database
+// Stores text content in database
 export const putDb = async (content) => {
   const jateDB = await openDB('jate',1)
   const tx = jateDB.transaction('jate','readwrite')
@@ -20,10 +21,9 @@ export const putDb = async (content) => {
   const request = store.put({id:1 ,value:content})
   const result = await request
   console.log('Edited Text',result)
-  // console.error('putDb not implemented')
 };
 
-// TODO: Add logic for a method that gets all the content from the database
+// gets all the content from the database
 export const getDb = async () => {
   const jateDB = await openDB('jate',1)
   const tx = jateDB.transaction('jate','readonly')
@@ -32,7 +32,6 @@ export const getDb = async () => {
   const result = await request
   console.log(result)
   return result?.value
-  // console.error('getDb not implemented')
 };
 
 initdb();
